@@ -2,6 +2,7 @@ import React,{ useState,useEffect} from "react";
 import { NavLink } from "react-router-dom";
 import axios from 'axios';
 const Menu = () => {
+  const API = "https://zerodha-backend-z9ph.onrender.com";
   const [activeMenu, setActiveMenu] = useState("dashboard");
   const [isProfileOpen, setIsProfileOpen] = useState(false);
 
@@ -15,7 +16,7 @@ const Menu = () => {
 
    useEffect(() => {
      axios
-      .get("http://localhost:5000/users/profile")
+      .get(`${API}/users/profile`)
       .then((res) => setProfile(res.data))
       .catch((err) => console.log(err));
     }, []);

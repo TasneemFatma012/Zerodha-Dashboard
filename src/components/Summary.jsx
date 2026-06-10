@@ -18,7 +18,7 @@ const data = [
 ];
 
 const Summary = () => {
-  
+  const API = "https://zerodha-backend-z9ph.onrender.com";
   const [funds, setFunds] = useState(null);
   const [holdings, setHoldings] = useState([]);
   const [profile, setProfile] = useState(null);
@@ -26,18 +26,18 @@ const Summary = () => {
   useEffect(() => {
     // Funds
     axios
-      .get("http://localhost:5000/funds")
+      .get(`${API}/funds`)
       .then((res) => setFunds(res.data))
       .catch((err) => console.log(err));
       // Holdings
     axios
-      .get("http://localhost:5000/allHoldings")
+      .get(`${API}/allHoldings`)
       .then((res) => setHoldings(res.data))
       .catch((err) => console.log(err));
 
     // User Profile
     axios
-      .get("http://localhost:5000/users/profile")
+      .get(`${API}/users/profile`)
       .then((res) => setProfile(res.data))
       .catch((err) => console.log(err));
   }, []);

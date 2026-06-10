@@ -3,11 +3,12 @@ import Menu from "./Menu";
 import axios from "axios";
 
 const TopBar = () => {
+  const API = "https://zerodha-backend-z9ph.onrender.com";
   const [markets, setMarkets] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/market")
+      .get(`${API}/market`)
       .then((res) => setMarkets(res.data))
       .catch((err) => console.log(err));
   }, []);

@@ -1,10 +1,10 @@
 import React,{useState,useEffect} from "react";
 import axios from 'axios';
 const Holdings = () => {
-  
+  const API = "https://zerodha-backend-z9ph.onrender.com";
   const [allHoldings,setAllHoldings] = useState([]);
   useEffect(()=>{
-    axios.get("http://localhost:5000/allHoldings")
+    axios.get(`${API}/allHoldings`)
     .then((res)=>{
       console.log(res.data);
       setAllHoldings(res.data);

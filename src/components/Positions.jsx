@@ -2,9 +2,10 @@ import React,{useState,useEffect} from "react";
 import axios from 'axios';
 
 const Positions = () => {
+  const API = "https://zerodha-backend-z9ph.onrender.com";
   const [allPositions,setAllPositions] = useState([]);
   useEffect(()=>{
-    axios.get("http://localhost:5000/allPositions")
+    axios.get(`${API}/allPositions`)
     .then((res)=>{
       console.log(res.data);
       setAllPositions(res.data);

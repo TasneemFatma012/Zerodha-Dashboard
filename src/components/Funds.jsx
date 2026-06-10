@@ -3,15 +3,16 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 
 const Funds = () => {
+  const API = "https://zerodha-backend-z9ph.onrender.com";
   const [commodity, setCommodity] = useState(null);
   useEffect(() => {
-  axios.get("http://localhost:5000/commodity")
+  axios.get(`${API}/commodity`)
     .then((res) => setCommodity(res.data))
     .catch((err) => console.log(err));
 }, []);
 
 const handleOpenCommodity = async () => {
-  const res = await axios.post("http://localhost:5000/commodity/open");
+  const res = await axios.post(`${API}/commodity/open`);
   setCommodity(res.data);
 };
 
@@ -23,7 +24,7 @@ const handleOpenCommodity = async () => {
 
   try {
     const res = await axios.post(
-      "http://localhost:5000/addFunds",
+      `${API}/addFunds`,
       {
         amount: Number(amount),
       }
@@ -38,7 +39,7 @@ const handleOpenCommodity = async () => {
 };
   useEffect(() => {
   axios
-    .get("http://localhost:5000/funds")
+    .get(`${API}/funds`)
     .then((res) => {
       setFunds(res.data);
     })
@@ -52,7 +53,7 @@ const handleWithdraw = async () => {
 
   try {
     const res = await axios.post(
-      "http://localhost:5000/withdraw",
+      `${API}/withdraw`,
       {
         amount: Number(amount),
       }

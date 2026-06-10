@@ -4,16 +4,18 @@ import axios from "axios";
 import GeneralContext from "./GeneralContext";
 
 const SellActionWindow = ({ uid }) => {
+  const API = "https://zerodha-backend-z9ph.onrender.com";
   const generalContext = useContext(GeneralContext);
 
   const [stockQuantity, setStockQuantity] = useState(1);
   const [stockPrice, setStockPrice] = useState(0.0);
 
   const handleSellClick = async () => {
+    
     console.log("Sell button clicked");
 
     try {
-      const res = await axios.post("http://localhost:5000/newOrder", {
+      const res = await axios.post(`${API}/newOrder`, {
         name: uid,
         qty: stockQuantity,
         price: stockPrice,

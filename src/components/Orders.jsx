@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const Orders = () => {
+  const API = "https://zerodha-backend-z9ph.onrender.com";
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -11,7 +12,7 @@ const Orders = () => {
 
   const fetchOrders = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/newOrder");
+      const res = await axios.get(`${API}/newOrder`);
       setOrders(res.data);
     } catch (err) {
       console.error("Error fetching orders:", err);

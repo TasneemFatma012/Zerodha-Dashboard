@@ -13,7 +13,7 @@ const BuyActionWindow = ({ uid }) => {
   console.log("Buy button clicked");
 
   try {
-    const res = await axios.post("http://localhost:5000/newOrder", {
+    const res = await axios.post(`${API}/newOrder`, {
       name: uid,
       qty: stockQuantity,
       price: stockPrice,
