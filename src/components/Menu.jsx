@@ -1,7 +1,7 @@
 import React,{ useState,useEffect} from "react";
 import { NavLink } from "react-router-dom";
 import axios from 'axios';
-const API = import.meta.env.REACT_APP_API_URL;
+const API = import.meta.env.VITE_API_URL;
 const Menu = () => {
 
   const [activeMenu, setActiveMenu] = useState("dashboard");

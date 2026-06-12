@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Menu from "./Menu";
 import axios from "axios";
-const API = import.meta.env.REACT_APP_API_URL;
+const API = import.meta.env.VITE_API_URL;
 const TopBar = () => {
 
   const [markets, setMarkets] = useState([]);
 
-  useEffect(() => {
+ useEffect(() => {
     axios
       .get(`${API}/market`)
-      .then((res) => setMarkets(res.data))
+      .then((res) => {
+        console.log("MARKET API:", res.data);
+
+        
+        setMarkets(Array.isArray(res.data) ? res.data : []);
+      })
       .catch((err) => console.log(err));
   }, []);
 
@@ -17,7 +22,7 @@ const TopBar = () => {
     <header className="topbar">
       <div className="market-status">
 
-        {markets.map((market) => (
+       {(markets || []).map((market) => (
           <div className="market-card" key={market._id}>
             <span className="market-name">{market.name}</span>
 

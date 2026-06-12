@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
-const API = import.meta.env.REACT_APP_API_URL;
+const API = import.meta.env.VITE_API_URL;
 import {
   LineChart,
   Line,
@@ -32,9 +32,14 @@ const Summary = () => {
       .catch((err) => console.log(err));
       // Holdings
     axios
-      .get(`${API}/allHoldings`)
-      .then((res) => setHoldings(res.data))
-      .catch((err) => console.log(err));
+    .get(`${API}/allHoldings`)
+    .then((res) => {
+      console.log("HOLDINGS:", res.data);
+
+      setHoldings(Array.isArray(res.data) ? res.data : []);
+    })
+    .catch((err) => console.log(err));
+
 
     // User Profile
     axios
@@ -43,10 +48,9 @@ const Summary = () => {
       .catch((err) => console.log(err));
   }, []);
   // Portfolio Calculations
-  const investment = holdings.reduce(
-    (sum, item) => sum + item.avg * item.qty,
-    0
-  );
+  const investment = Array.isArray(holdings)
+  ? holdings.reduce((sum, item) => sum + item.price * item.qty, 0)
+  : 0;
 
   const currentValue = holdings.reduce(
     (sum, item) => sum + item.price * item.qty,

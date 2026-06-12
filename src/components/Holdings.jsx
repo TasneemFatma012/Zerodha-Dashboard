@@ -1,17 +1,21 @@
-import React,{useState,useEffect} from "react";
-import axios from 'axios';
-const API = import.meta.env.REACT_APP_API_URL;
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 const Holdings = () => {
+  const API = import.meta.env.VITE_API_URL;
 
-  const [allHoldings,setAllHoldings] = useState([]);
-  useEffect(()=>{
-    axios.get(`${API}/allHoldings`)
-    .then((res)=>{
-      console.log(res.data);
-      setAllHoldings(res.data);
+  const [allHoldings, setAllHoldings] = useState([]);
 
-    });
-  },[]);
+  useEffect(() => {
+    axios
+      .get(`${API}/allHoldings`)
+      .then((res) => {
+        console.log("HOLDINGS:", res.data);
+
+        setAllHoldings(Array.isArray(res.data) ? res.data : []);
+      })
+      .catch((err) => console.log(err));
+  }, [API]);
 
   return (
     <div className="holdings-container">
@@ -33,33 +37,40 @@ const Holdings = () => {
           </thead>
 
           <tbody>
-            {allHoldings.map((stock, index) => {
-              const currentValue = stock.qty * stock.price;
-              const pl = currentValue - (stock.qty * stock.avg);
-              const profitClass = pl > 0 ? "positive" : "negative";
-              const netChange = ((pl / (stock.qty * stock.avg)) * 100).toFixed(2);
-              const dayChange = stock.day; 
+            {(allHoldings || []).map((stock) => {
+              const qty = Number(stock.qty || 0);
+              const avg = Number(stock.avg || 0);
+              const price = Number(stock.price || 0);
+
+              const currentValue = qty * price;
+              const pl = currentValue - qty * avg;
+              const profitClass = pl >= 0 ? "positive" : "negative";
+
+              const netChange = ((pl / (qty * avg || 1)) * 100).toFixed(2);
+              const dayChange = stock.day || "0%";
+
               return (
-                <tr key={index}>
-                  <td>{stock.name}</td> 
-                  <td>{stock.qty}</td>  
-                  <td>₹{stock.avg.toFixed(2)}</td>
-                  <td>₹{stock.price.toFixed(2)}</td>
+                <tr key={stock._id || stock.name}>
+                  <td>{stock.name}</td>
+                  <td>{qty}</td>
+                  <td>₹{avg.toFixed(2)}</td>
+                  <td>₹{price.toFixed(2)}</td>
                   <td>₹{currentValue.toFixed(2)}</td>
+
                   <td className={profitClass}>
                     {pl >= 0 ? "+" : ""}₹{pl.toFixed(2)}
-                  </td> 
+                  </td>
+
                   <td className={profitClass}>
                     {netChange >= 0 ? "+" : ""}{netChange}%
                   </td>
+
                   <td className={dayChange.includes("+") ? "positive" : "negative"}>
                     {dayChange}
                   </td>
                 </tr>
               );
-
-              
-       })}
+            })}
           </tbody>
         </table>
       </div>
