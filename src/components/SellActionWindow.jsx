@@ -2,9 +2,9 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import GeneralContext from "./GeneralContext";
-
+const API = import.meta.env.REACT_APP_API_URL;
 const SellActionWindow = ({ uid }) => {
-  const API = "https://zerodha-backend-z9ph.onrender.com";
+
   const generalContext = useContext(GeneralContext);
 
   const [stockQuantity, setStockQuantity] = useState(1);

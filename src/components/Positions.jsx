@@ -1,8 +1,9 @@
 import React,{useState,useEffect} from "react";
 import axios from 'axios';
+const API = import.meta.env.REACT_APP_API_URL;
 
 const Positions = () => {
-  const API = "https://zerodha-backend-z9ph.onrender.com";
+
   const [allPositions,setAllPositions] = useState([]);
   useEffect(()=>{
     axios.get(`${API}/allPositions`)

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Menu from "./Menu";
 import axios from "axios";
-
+const API = import.meta.env.REACT_APP_API_URL;
 const TopBar = () => {
-  const API = "https://zerodha-backend-z9ph.onrender.com";
+
   const [markets, setMarkets] = useState([]);
 
   useEffect(() => {

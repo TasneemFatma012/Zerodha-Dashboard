@@ -2,14 +2,17 @@ import React ,{useState,useEffect} from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 
+const API = import.meta.env.REACT_APP_API_URL;
+
 const Funds = () => {
-  const API = "https://zerodha-backend-z9ph.onrender.com";
   const [commodity, setCommodity] = useState(null);
+
   useEffect(() => {
-  axios.get(`${API}/commodity`)
-    .then((res) => setCommodity(res.data))
-    .catch((err) => console.log(err));
-}, []);
+    axios.get(`${API}/commodity`)
+      .then((res) => setCommodity(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+
 
 const handleOpenCommodity = async () => {
   const res = await axios.post(`${API}/commodity/open`);

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+const API = import.meta.env.REACT_APP_API_URL;
 const Orders = () => {
-  const API = "https://zerodha-backend-z9ph.onrender.com";
+
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
