@@ -17,7 +17,7 @@ const Orders = () => {
   const fetchOrders = async () => {
     try {
 
-      const res = await axios.get(`${API}/newOrder`);
+      const res = await axios.get(`${API}/orders`);
       console.log("FULL RESPONSE:", res);
       console.log("DATA:", res.data);
 

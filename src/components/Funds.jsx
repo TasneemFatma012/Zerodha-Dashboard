@@ -39,7 +39,7 @@ const Funds = () => {
     if (!amount) return;
 
     try {
-      const res = await axios.post(`${API}/addFunds`, {
+      const res = await axios.post(`${API}/funds/add`, {
         amount: Number(amount),
       });
 
@@ -56,7 +56,7 @@ const Funds = () => {
     if (!amount) return;
 
     try {
-      const res = await axios.post(`${API}/withdraw`, {
+      const res = await axios.post(`${API}/funds/withdraw`, {
         amount: Number(amount),
       });
 

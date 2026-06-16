@@ -8,7 +8,7 @@ const Holdings = () => {
 
   useEffect(() => {
     axios
-      .get(`${API}/allHoldings`)
+      .get(`${API}/holdings`)
       .then((res) => {
         console.log("HOLDINGS:", res.data);
 

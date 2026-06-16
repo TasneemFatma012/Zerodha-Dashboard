@@ -6,7 +6,7 @@ const Positions = () => {
 
   const [allPositions,setAllPositions] = useState([]);
   useEffect(()=>{
-    axios.get(`${API}/allPositions`)
+    axios.get(`${API}/positions`)
     .then((res)=>{
       console.log(res.data);
       setAllPositions(res.data);

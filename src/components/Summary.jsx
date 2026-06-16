@@ -32,7 +32,7 @@ const Summary = () => {
       .catch((err) => console.log(err));
       // Holdings
     axios
-    .get(`${API}/allHoldings`)
+    .get(`${API}/holdings`)
     .then((res) => {
       console.log("HOLDINGS:", res.data);
 
