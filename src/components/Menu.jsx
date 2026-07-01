@@ -13,8 +13,11 @@ const [profile,setProfile] = useState(null);
 const navigate = useNavigate();
 
 
-
 const [isProfileOpen,setIsProfileOpen] = useState(false);
+
+
+// mobile menu
+const [menuOpen,setMenuOpen] = useState(false);
 
 
 
@@ -23,6 +26,7 @@ const handleProfileClick = () => {
 setIsProfileOpen(!isProfileOpen);
 
 };
+
 
 
 
@@ -37,7 +41,6 @@ const id = localStorage.getItem("userId");
 if(!id){
   return;
 }
-
 
 
 axios
@@ -58,6 +61,7 @@ console.log(err);
 
 
 
+
 // Logout
 
 const handleLogout = ()=>{
@@ -72,8 +76,9 @@ navigate("/login");
 
 
 
-return (
 
+
+return (
 
 <nav className="menu-container">
 
@@ -89,64 +94,68 @@ return (
 
 
 
-<ul className="menu-list">
+{/* Hamburger Button */}
+
+<button 
+className="menu-toggle"
+onClick={()=>setMenuOpen(!menuOpen)}
+>
+
+☰
+
+</button>
+
+
+
+
+
+<ul className={`menu-list ${menuOpen ? "open":""}`}>
 
 
 <li>
-
-<NavLink to="/" end>
+<NavLink to="/" end onClick={()=>setMenuOpen(false)}>
 Dashboard
 </NavLink>
-
 </li>
 
 
-<li>
 
-<NavLink to="/orders">
+<li>
+<NavLink to="/orders" onClick={()=>setMenuOpen(false)}>
 Orders
 </NavLink>
-
 </li>
 
 
 
 <li>
-
-<NavLink to="/holdings">
+<NavLink to="/holdings" onClick={()=>setMenuOpen(false)}>
 Holdings
 </NavLink>
-
 </li>
 
 
 
 <li>
-
-<NavLink to="/positions">
+<NavLink to="/positions" onClick={()=>setMenuOpen(false)}>
 Positions
 </NavLink>
-
 </li>
 
 
 
 <li>
-
-<NavLink to="/funds">
+<NavLink to="/funds" onClick={()=>setMenuOpen(false)}>
 Funds
 </NavLink>
-
 </li>
 
 
 
 <li>
-
-<NavLink to="/apps">
+<NavLink to="/apps" onClick={()=>setMenuOpen(false)}>
 Apps
 </NavLink>
-
 </li>
 
 
@@ -156,8 +165,9 @@ Apps
 
 
 
-{/* Profile Section */}
 
+
+{/* Profile */}
 
 {
 profile ? (
@@ -167,7 +177,6 @@ profile ? (
 className="profile-card"
 onClick={handleProfileClick}
 >
-
 
 
 <div className="avatar">
@@ -206,9 +215,9 @@ profile?.username
 {
 isProfileOpen &&
 
-<button onClick={handleLogout}
+<button 
+onClick={handleLogout}
 className="logout-btn"
-
 >
 
 Logout
@@ -221,12 +230,14 @@ Logout
 </div>
 
 
-
 )
+
 
 :
 
+
 (
+
 
 <div className="auth-buttons">
 
@@ -256,11 +267,10 @@ Signup
 
 </div>
 
+
 )
 
 }
-
-
 
 
 
