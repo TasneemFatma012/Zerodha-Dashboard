@@ -3039,7 +3039,12 @@ overflow:hidden;
 
 }
 
+.profile-text {
 
+display:flex;
+flex-direction:column;
+
+}
 
 .profile-text b{
 
