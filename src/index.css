@@ -3041,12 +3041,16 @@ overflow:hidden;
 
 
 
-.profile-text{
+.profile-text b{
 
-display:none;
+font-size:13px;
 
 }
 
+.profile-text small{
+font-size:10px;
+
+}
 
 
 .avatar{
