@@ -2823,8 +2823,6 @@ flex-direction:column;
 
 justify-content:center;
 
-line-height: 1.1;
-
 overflow:hidden;
 
 }
@@ -2832,7 +2830,7 @@ overflow:hidden;
 
 .profile-text b{
 
-font-size:12px;
+font-size:10px;
 line-height:1.2;
 white-space:nowrap;
 overflow: hidden;
