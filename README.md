@@ -1,1 +1,1 @@
-# zerodha-dashboard
+# Nexora-TradingPlatform-dashboard
