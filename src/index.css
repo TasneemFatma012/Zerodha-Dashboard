@@ -2655,6 +2655,8 @@ padding:0 12px;
 
 position:relative;
 
+overflow: visible;
+
 }
 
 
@@ -2788,7 +2790,7 @@ align-items:center;
 
 .profile-card{
 
-height:60px;
+height:72px;
 
 max-width:150px;
 
