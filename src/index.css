@@ -2527,7 +2527,63 @@ cursor:pointer;
 font-weight:700;
 
 }
+/* Modern Mobile Toggle */
 
+.menu-toggle{
+
+display:none;
+
+width:42px;
+
+height:42px;
+
+border-radius:12px;
+
+background:linear-gradient(
+135deg,
+#171b23,
+#0d1016
+);
+
+border:1px solid rgba(0,245,212,0.4);
+
+color:#00f5d4;
+
+font-size:22px;
+
+font-weight:bold;
+
+align-items:center;
+
+justify-content:center;
+
+cursor:pointer;
+
+box-shadow:
+0 0 15px rgba(0,245,212,0.15);
+
+transition:.3s ease;
+
+}
+
+
+
+.menu-toggle:hover{
+
+border-color:#00f5d4;
+
+box-shadow:
+0 0 20px rgba(0,245,212,0.35);
+
+}
+
+
+
+.menu-toggle:active{
+
+transform:scale(.9);
+
+}
 /* =========================
    MOBILE RESPONSIVE FIX
 ========================= */
@@ -2916,28 +2972,70 @@ display:none;
 
 }
 
+
 @media(max-width:768px){
 
-.menu-container{
-  width:100%;
-  height:65px;
-  padding:0 12px;
 
+.menu-container{
+
+width:100%;
+
+height:65px;
+
+padding:0 12px;
 
 display:flex;
-align-items: center;
+
+align-items:center;
+
 justify-content:space-between;
+
 gap:8px;
-overflow: hidden;
+
+overflow:hidden;
 
 }
+
+
+
+
+.logo-section{
+
+flex-shrink:1;
+
+}
+
+
+
+.logo-section h3{
+
+font-size:22px;
+
+white-space:nowrap;
+
+}
+
+
+
+.logo-section span{
+
+display:none;
+
+}
+
+
+
+
+
 
 
 .nav-right{
 
 display:flex;
-align-items: center;
-flex-shrink: 0;
+
+align-items:center;
+
+flex-shrink:0;
 
 }
 
@@ -2953,88 +3051,59 @@ gap:8px;
 
 
 
+
+.login-btn,
+.signup-btn{
+
+
+padding:8px 14px;
+
+font-size:12px;
+
+border-radius:10px;
+
+white-space:nowrap;
+
+
+}
+
+
+
+
+
+
 .menu-toggle{
+
 
 display:flex;
-flex-shrink: 0;
-width: 42px;
-height: 42px;
-border-radius: 12px;
-font-size: 22px;
-}
 
+flex-shrink:0;
 
-
-}
-
-/* Modern Mobile Toggle */
-
-.menu-toggle{
-
-display:none;
 
 width:42px;
 
 height:42px;
 
+
 border-radius:12px;
 
-background:linear-gradient(
-135deg,
-#171b23,
-#0d1016
-);
-
-border:1px solid rgba(0,245,212,0.4);
-
-color:#00f5d4;
 
 font-size:22px;
 
-font-weight:bold;
-
-align-items:center;
-
-justify-content:center;
-
-cursor:pointer;
-
-box-shadow:
-0 0 15px rgba(0,245,212,0.15);
-
-transition:.3s ease;
 
 }
 
 
 
-.menu-toggle:hover{
-
-border-color:#00f5d4;
-
-box-shadow:
-0 0 20px rgba(0,245,212,0.35);
-
-}
 
 
+.menu-list.open{
 
-.menu-toggle:active{
-
-transform:scale(.9);
+top:65px;
 
 }
 
 
 
-/* mobile */
-
-@media(max-width:768px){
-
-.menu-toggle{
-
-display:flex;
-
-}
 
 }
