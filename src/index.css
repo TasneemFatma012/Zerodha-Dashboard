@@ -2954,3 +2954,75 @@ display:flex;
 
 
 }
+
+/* Modern Mobile Toggle */
+
+.menu-toggle{
+
+display:none;
+
+width:42px;
+
+height:42px;
+
+border-radius:12px;
+
+background:linear-gradient(
+135deg,
+#171b23,
+#0d1016
+);
+
+border:1px solid rgba(0,245,212,0.4);
+
+color:#00f5d4;
+
+font-size:22px;
+
+font-weight:bold;
+
+align-items:center;
+
+justify-content:center;
+
+cursor:pointer;
+
+box-shadow:
+0 0 15px rgba(0,245,212,0.15);
+
+transition:.3s ease;
+
+}
+
+
+
+.menu-toggle:hover{
+
+border-color:#00f5d4;
+
+box-shadow:
+0 0 20px rgba(0,245,212,0.35);
+
+}
+
+
+
+.menu-toggle:active{
+
+transform:scale(.9);
+
+}
+
+
+
+/* mobile */
+
+@media(max-width:768px){
+
+.menu-toggle{
+
+display:flex;
+
+}
+
+}
