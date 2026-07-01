@@ -2788,11 +2788,11 @@ align-items:center;
 
 .profile-card{
 
-height:45px;
+height:60px;
 
-max-width:130px;
+max-width:150px;
 
-padding:5px 8px;
+padding:8px 10px;
 
 border:1px solid #00f5d4;
 
@@ -2818,12 +2818,17 @@ display:flex;
 
 flex-direction:column;
 
+justify-content:center;
+
+line-height: 1.1;
+
 }
 
 
 .profile-text b{
 
 font-size:12px;
+white-space:nowrap;
 
 }
 
@@ -2834,6 +2839,10 @@ font-size:12px;
 font-size:10px;
 
 color:var(--text-muted);
+
+margin-top:-2px;
+
+white-space:nowrap;
 
 }
 
@@ -2848,6 +2857,8 @@ width:32px;
 height:32px;
 
 font-size:12px;
+
+flex-shrink: 0;
 
 }
 
