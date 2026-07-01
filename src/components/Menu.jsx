@@ -1,60 +1,48 @@
-import React,{useState,useEffect} from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import React,{useState,useEffect,useRef} from "react";
+import { NavLink,useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const API = import.meta.env.VITE_API_URL;
 
 
-const Menu = () => {
+const Menu =()=>{
 
 
-const [profile,setProfile] = useState(null);
+const [profile,setProfile]=useState(null);
 
-const navigate = useNavigate();
+const [menuOpen,setMenuOpen]=useState(false);
 
-
-const [isProfileOpen,setIsProfileOpen] = useState(false);
-
-
-// mobile menu
-const [menuOpen,setMenuOpen] = useState(false);
+const [profileOpen,setProfileOpen]=useState(false);
 
 
+const navigate=useNavigate();
 
-const handleProfileClick = () => {
 
-setIsProfileOpen(!isProfileOpen);
-
-};
+const menuRef=useRef();
 
 
 
 
-// Get Profile
+
+// get profile
 
 useEffect(()=>{
 
 
-const id = localStorage.getItem("userId");
+const id=localStorage.getItem("userId");
 
 
-if(!id){
-  return;
-}
+if(!id)return;
 
 
 axios
 .get(`${API}/users/profile?id=${id}`)
-.then((res)=>{
+.then(res=>{
 
 setProfile(res.data);
 
 })
-.catch((err)=>{
-
-console.log(err);
-
-});
+.catch(err=>console.log(err));
 
 
 },[]);
@@ -62,9 +50,54 @@ console.log(err);
 
 
 
-// Logout
 
-const handleLogout = ()=>{
+
+// close outside
+
+useEffect(()=>{
+
+
+const close=(e)=>{
+
+if(
+menuRef.current &&
+!menuRef.current.contains(e.target)
+){
+
+setMenuOpen(false);
+setProfileOpen(false);
+
+}
+
+};
+
+
+document.addEventListener(
+"mousedown",
+close
+);
+
+
+return()=>{
+
+document.removeEventListener(
+"mousedown",
+close
+)
+
+}
+
+
+},[]);
+
+
+
+
+
+
+
+const logout=()=>{
+
 
 localStorage.removeItem("userId");
 
@@ -72,21 +105,36 @@ setProfile(null);
 
 navigate("/login");
 
+
 };
 
 
 
 
 
-return (
 
-<nav className="menu-container">
+return(
 
 
+<nav 
+className="menu-container"
+ref={menuRef}
+>
+
+
+
+
+{/* Logo */}
 
 <div className="logo-section">
 
-<h3>Nexora</h3>
+<h3>
+Nexora
+</h3>
+
+<span>
+Trading
+</span>
 
 </div>
 
@@ -94,11 +142,16 @@ return (
 
 
 
-{/* Hamburger Button */}
 
-<button 
+
+{/* Mobile button */}
+
+<button
+
 className="menu-toggle"
+
 onClick={()=>setMenuOpen(!menuOpen)}
+
 >
 
 ☰
@@ -109,51 +162,51 @@ onClick={()=>setMenuOpen(!menuOpen)}
 
 
 
-<ul className={`menu-list ${menuOpen ? "open":""}`}>
+
+
+
+<ul 
+className={`menu-list ${menuOpen?"open":""}`}
+>
 
 
 <li>
-<NavLink to="/" end onClick={()=>setMenuOpen(false)}>
+<NavLink to="/" end>
 Dashboard
 </NavLink>
 </li>
 
 
-
 <li>
-<NavLink to="/orders" onClick={()=>setMenuOpen(false)}>
+<NavLink to="/orders">
 Orders
 </NavLink>
 </li>
 
 
-
 <li>
-<NavLink to="/holdings" onClick={()=>setMenuOpen(false)}>
+<NavLink to="/holdings">
 Holdings
 </NavLink>
 </li>
 
 
-
 <li>
-<NavLink to="/positions" onClick={()=>setMenuOpen(false)}>
+<NavLink to="/positions">
 Positions
 </NavLink>
 </li>
 
 
-
 <li>
-<NavLink to="/funds" onClick={()=>setMenuOpen(false)}>
+<NavLink to="/funds">
 Funds
 </NavLink>
 </li>
 
 
-
 <li>
-<NavLink to="/apps" onClick={()=>setMenuOpen(false)}>
+<NavLink to="/apps">
 Apps
 </NavLink>
 </li>
@@ -167,22 +220,30 @@ Apps
 
 
 
-{/* Profile */}
+
+
+{/* RIGHT SIDE */}
+
+<div className="nav-right">
+
+
 
 {
-profile ? (
+
+profile ?
 
 
 <div 
 className="profile-card"
-onClick={handleProfileClick}
+onClick={()=>setProfileOpen(!profileOpen)}
 >
+
 
 
 <div className="avatar">
 
 {
-profile?.username
+profile.username
 ?.slice(0,2)
 .toUpperCase()
 
@@ -192,51 +253,49 @@ profile?.username
 
 
 
-<div>
+<div className="profile-text">
 
-<p className="username">
-
-{profile?.username}
-
-</p>
+<b>
+{profile.username}
+</b>
 
 
-<span className="role">
-
-{profile?.role}
-
-</span>
+<small>
+{profile.role}
+</small>
 
 
 </div>
 
 
 
-{
-isProfileOpen &&
 
-<button 
-onClick={handleLogout}
+
+{
+
+profileOpen &&
+
+
+<button
 className="logout-btn"
+onClick={logout}
 >
 
 Logout
 
 </button>
 
+
 }
+
 
 
 </div>
 
 
-)
-
 
 :
 
-
-(
 
 
 <div className="auth-buttons">
@@ -245,21 +304,16 @@ Logout
 <NavLink to="/login">
 
 <button className="login-btn">
-
 Login
-
 </button>
 
 </NavLink>
 
 
-
 <NavLink to="/signup">
 
 <button className="signup-btn">
-
 Signup
-
 </button>
 
 </NavLink>
@@ -268,19 +322,22 @@ Signup
 </div>
 
 
-)
 
 }
+
+
+
+</div>
 
 
 
 </nav>
 
 
-);
 
+)
 
-};
+}
 
 
 export default Menu;
