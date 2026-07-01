@@ -2806,6 +2806,7 @@ align-items:center;
 
 gap:6px;
 
+overflow:hidden;
 
 
 }
@@ -2822,13 +2823,18 @@ justify-content:center;
 
 line-height: 1.1;
 
+overflow:hidden;
+
 }
 
 
 .profile-text b{
 
 font-size:12px;
+line-height:1.2;
 white-space:nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 
 }
 
