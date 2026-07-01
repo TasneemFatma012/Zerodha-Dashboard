@@ -2978,19 +2978,15 @@ display:none;
 
 .menu-container{
 
-width:100%;
-
-height:65px;
-
-padding:0 12px;
-
 display:flex;
 
 align-items:center;
 
 justify-content:space-between;
 
-gap:8px;
+gap:10px;
+
+padding:0 12px;
 
 overflow:hidden;
 
@@ -2999,17 +2995,24 @@ overflow:hidden;
 
 
 
+/* Logo */
+
 .logo-section{
 
-flex-shrink:1;
+flex:1;
+
+min-width:0;
 
 }
-
 
 
 .logo-section h3{
 
 font-size:22px;
+
+overflow:hidden;
+
+text-overflow:ellipsis;
 
 white-space:nowrap;
 
@@ -3017,7 +3020,28 @@ white-space:nowrap;
 
 
 
-.logo-section span{
+
+
+/* Profile */
+
+
+.profile-card{
+
+display:flex;
+
+align-items:center;
+
+gap:6px;
+
+max-width:120px;
+
+overflow:hidden;
+
+}
+
+
+
+.profile-text{
 
 display:none;
 
@@ -3025,84 +3049,70 @@ display:none;
 
 
 
+.avatar{
 
+width:38px;
 
+height:38px;
 
-
-.nav-right{
-
-display:flex;
-
-align-items:center;
-
-flex-shrink:0;
+font-size:13px;
 
 }
 
+
+
+
+/* Login Signup */
 
 
 .auth-buttons{
 
 display:flex;
 
-gap:8px;
+gap:6px;
 
 }
-
 
 
 
 .login-btn,
 .signup-btn{
 
-
-padding:8px 14px;
+padding:7px 12px;
 
 font-size:12px;
-
-border-radius:10px;
-
-white-space:nowrap;
-
 
 }
 
 
 
 
+/* Toggle */
 
 
 .menu-toggle{
-
-
-display:flex;
-
-flex-shrink:0;
-
 
 width:42px;
 
 height:42px;
 
-
-border-radius:12px;
-
-
-font-size:22px;
-
+flex-shrink:0;
 
 }
 
 
 
+/* dropdown */
 
+.logout-btn{
 
-.menu-list.open{
+right:0;
 
-top:65px;
+top:50px;
+
+z-index:9999;
 
 }
-
 
 
 
