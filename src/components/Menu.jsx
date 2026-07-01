@@ -15,34 +15,38 @@ const [menuOpen,setMenuOpen]=useState(false);
 const [profileOpen,setProfileOpen]=useState(false);
 
 
-const navigate=useNavigate();
+const navigate = useNavigate();
 
-
-const menuRef=useRef();
-
-
+const menuRef = useRef();
 
 
 
-// get profile
+
+
+// Get Profile
 
 useEffect(()=>{
 
 
-const id=localStorage.getItem("userId");
+const id = localStorage.getItem("userId");
 
 
-if(!id)return;
+if(!id) return;
+
 
 
 axios
 .get(`${API}/users/profile?id=${id}`)
-.then(res=>{
+.then((res)=>{
 
 setProfile(res.data);
 
 })
-.catch(err=>console.log(err));
+.catch((err)=>{
+
+console.log(err);
+
+});
 
 
 },[]);
@@ -52,40 +56,49 @@ setProfile(res.data);
 
 
 
-// close outside
+
+// Outside Click
+
 
 useEffect(()=>{
 
 
-const close=(e)=>{
+const handleClick=(e)=>{
+
 
 if(
 menuRef.current &&
 !menuRef.current.contains(e.target)
+
 ){
 
 setMenuOpen(false);
+
 setProfileOpen(false);
 
 }
 
+
 };
+
 
 
 document.addEventListener(
 "mousedown",
-close
+handleClick
 );
+
 
 
 return()=>{
 
 document.removeEventListener(
 "mousedown",
-close
-)
+handleClick
+);
 
 }
+
 
 
 },[]);
@@ -94,6 +107,9 @@ close
 
 
 
+
+
+// Logout
 
 
 const logout=()=>{
@@ -101,7 +117,9 @@ const logout=()=>{
 
 localStorage.removeItem("userId");
 
+
 setProfile(null);
+
 
 navigate("/login");
 
@@ -124,17 +142,23 @@ ref={menuRef}
 
 
 
-{/* Logo */}
+
+
+{/* LOGO */}
+
 
 <div className="logo-section">
+
 
 <h3>
 Nexora
 </h3>
 
+
 <span>
 Trading
 </span>
+
 
 </div>
 
@@ -144,7 +168,292 @@ Trading
 
 
 
-{/* Mobile button */}
+
+
+{/* MENU LINKS */}
+
+
+
+<ul 
+className={`menu-list ${menuOpen ? "open":""}`}
+>
+
+
+
+<li>
+
+<NavLink 
+to="/"
+end
+onClick={()=>setMenuOpen(false)}
+>
+
+Dashboard
+
+</NavLink>
+
+</li>
+
+
+
+
+<li>
+
+<NavLink 
+to="/orders"
+onClick={()=>setMenuOpen(false)}
+>
+
+Orders
+
+</NavLink>
+
+</li>
+
+
+
+
+
+<li>
+
+<NavLink 
+to="/holdings"
+onClick={()=>setMenuOpen(false)}
+>
+
+Holdings
+
+</NavLink>
+
+</li>
+
+
+
+
+
+<li>
+
+<NavLink 
+to="/positions"
+onClick={()=>setMenuOpen(false)}
+>
+
+Positions
+
+</NavLink>
+
+</li>
+
+
+
+
+
+<li>
+
+<NavLink 
+to="/funds"
+onClick={()=>setMenuOpen(false)}
+>
+
+Funds
+
+</NavLink>
+
+</li>
+
+
+
+
+
+<li>
+
+<NavLink 
+to="/apps"
+onClick={()=>setMenuOpen(false)}
+>
+
+Apps
+
+</NavLink>
+
+</li>
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+{/* RIGHT SECTION */}
+
+
+<div className="nav-right">
+
+
+
+
+
+{
+
+profile ? (
+
+
+
+<div
+className="profile-card"
+
+onClick={()=>setProfileOpen(!profileOpen)}
+
+>
+
+
+
+
+<div className="avatar">
+
+{
+
+profile.username
+?.slice(0,2)
+.toUpperCase()
+
+}
+
+</div>
+
+
+
+
+
+
+<div className="profile-text">
+
+
+<b>
+
+{profile.username}
+
+</b>
+
+
+
+<small>
+
+{profile.role}
+
+</small>
+
+
+</div>
+
+
+
+
+
+
+
+
+{
+
+profileOpen &&
+
+
+<button
+
+className="logout-btn"
+
+onClick={logout}
+
+>
+
+Logout
+
+</button>
+
+
+}
+
+
+
+
+</div>
+
+
+
+
+
+)
+
+:
+
+
+
+(
+
+
+
+<div className="auth-buttons">
+
+
+
+<NavLink to="/login">
+
+<button className="login-btn">
+
+Login
+
+</button>
+
+</NavLink>
+
+
+
+
+
+<NavLink to="/signup">
+
+<button className="signup-btn">
+
+Signup
+
+</button>
+
+</NavLink>
+
+
+
+</div>
+
+
+
+
+)
+
+
+}
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+{/* MOBILE TOGGLE */}
+
+
 
 <button
 
@@ -164,180 +473,14 @@ onClick={()=>setMenuOpen(!menuOpen)}
 
 
 
-
-<ul 
-className={`menu-list ${menuOpen?"open":""}`}
->
-
-
-<li>
-<NavLink to="/" end>
-Dashboard
-</NavLink>
-</li>
-
-
-<li>
-<NavLink to="/orders">
-Orders
-</NavLink>
-</li>
-
-
-<li>
-<NavLink to="/holdings">
-Holdings
-</NavLink>
-</li>
-
-
-<li>
-<NavLink to="/positions">
-Positions
-</NavLink>
-</li>
-
-
-<li>
-<NavLink to="/funds">
-Funds
-</NavLink>
-</li>
-
-
-<li>
-<NavLink to="/apps">
-Apps
-</NavLink>
-</li>
-
-
-</ul>
-
-
-
-
-
-
-
-
-
-{/* RIGHT SIDE */}
-
-<div className="nav-right">
-
-
-
-{
-
-profile ?
-
-
-<div 
-className="profile-card"
-onClick={()=>setProfileOpen(!profileOpen)}
->
-
-
-
-<div className="avatar">
-
-{
-profile.username
-?.slice(0,2)
-.toUpperCase()
-
-}
-
-</div>
-
-
-
-<div className="profile-text">
-
-<b>
-{profile.username}
-</b>
-
-
-<small>
-{profile.role}
-</small>
-
-
-</div>
-
-
-
-
-
-{
-
-profileOpen &&
-
-
-<button
-className="logout-btn"
-onClick={logout}
->
-
-Logout
-
-</button>
-
-
-}
-
-
-
-</div>
-
-
-
-:
-
-
-
-<div className="auth-buttons">
-
-
-<NavLink to="/login">
-
-<button className="login-btn">
-Login
-</button>
-
-</NavLink>
-
-
-<NavLink to="/signup">
-
-<button className="signup-btn">
-Signup
-</button>
-
-</NavLink>
-
-
-</div>
-
-
-
-}
-
-
-
-</div>
-
-
-
 </nav>
 
 
+);
 
-)
 
-}
+};
+
 
 
 export default Menu;
