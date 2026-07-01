@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import React, { useState,useContext } from "react";
 import { Tooltip } from "@mui/material";
 import { watchlist } from "../data/data";
@@ -88,6 +89,7 @@ const WatchListItem = ({ stock }) => {
 
 const WatchListActions = ({uid}) =>{
   const generalContext = useContext(GeneralContext);
+  const navigate = useNavigate();
 
   return (
   <span className="watchlist-actions">
@@ -104,13 +106,13 @@ const WatchListActions = ({uid}) =>{
   </Tooltip>
 
   <Tooltip title="Analytics" placement="top" arrow>
-    <button className="icon-btn">
+    <button className="icon-btn" onClick={()=>navigate("/analytics")}>
       <BarChartOutlined fontSize="small" />
     </button>
   </Tooltip>
 
   <Tooltip title="More" placement="top" arrow>
-    <button className="icon-btn">
+    <button className="icon-btn" onClick={()=>navigate("/more")}>
       <MoreHoriz fontSize="small" />
     </button>
   </Tooltip>

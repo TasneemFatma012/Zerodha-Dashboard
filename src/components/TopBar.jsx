@@ -22,19 +22,23 @@ const TopBar = () => {
     <header className="topbar">
       <div className="market-status">
 
-       {(markets || []).map((market) => (
-          <div className="market-card" key={market._id}>
-            <span className="market-name">{market.name}</span>
+      {(markets || []).map((market,index)=>(
+  <div className="market-card" key={market._id || index}>
 
-            <span className="market-value">
-              {market.value}
-            </span>
+    <span className="market-name">
+      {market.name}
+    </span>
 
-            <span className="market-change positive">
-              {market.change}
-            </span>
-          </div>
-        ))}
+    <span className="market-value">
+      {market.value}
+    </span>
+
+    <span className="market-change positive">
+      {market.change}
+    </span>
+
+  </div>
+))}
 
       </div>
 

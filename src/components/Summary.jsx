@@ -42,11 +42,29 @@ const Summary = () => {
 
 
     // User Profile
-    axios
-      .get(`${API}/users/profile`)
-      .then((res) => setProfile(res.data))
-      .catch((err) => console.log(err));
-  }, []);
+    
+
+
+    // User Profile
+
+const id = localStorage.getItem("userId");
+
+
+if(id){
+
+axios
+.get(`${API}/users/profile?id=${id}`)
+.then((res)=>{
+
+console.log("PROFILE:",res.data);
+
+setProfile(res.data);
+
+})
+.catch((err)=>console.log(err));
+
+}
+}, []);
   // Portfolio Calculations
   const investment = Array.isArray(holdings)
   ? holdings.reduce((sum, item) => sum + item.price * item.qty, 0)

@@ -7,147 +7,165 @@ const API = import.meta.env.VITE_API_URL;
 
 const AppDetail = () => {
 
-  const { id } = useParams();
-  const navigate = useNavigate();
 
-  const [app, setApp] = useState(null);
-  const [loading, setLoading] = useState(true);
+const {id}=useParams();
 
+const navigate=useNavigate();
 
 
-  useEffect(() => {
+const [app,setApp]=useState(null);
 
-    fetchApp();
+const [loading,setLoading]=useState(true);
 
-  }, []);
 
 
+useEffect(()=>{
 
-  const fetchApp = async () => {
+axios
+.get(`${API}/apps/${id}`)
+.then((res)=>{
 
-    try {
+setApp(res.data);
 
-      const res = await axios.get(`${API}/apps/${id}`);
+})
+.catch(err=>console.log(err))
+.finally(()=>setLoading(false));
 
-      console.log("App Detail:", res.data);
 
-      setApp(res.data);
+},[]);
 
 
-    } catch (err) {
 
-      console.log("Error:", err);
+if(loading)
+return <h2>Loading...</h2>
 
-    } finally {
 
-      setLoading(false);
 
-    }
+return(
 
-  };
 
+<div className="app-detail">
 
 
-  if (loading) {
 
-    return (
-      <div className="app-detail">
-        <h2>Loading App...</h2>
-      </div>
-    );
+<button 
+className="back-btn"
+onClick={()=>navigate("/apps")}
+>
+← Back
+</button>
 
-  }
 
 
 
-  if (!app) {
+<div 
+className="app-detail-icon"
+style={{
+background:app.color
+}}
+>
 
-    return (
-      <div className="app-detail">
-        <h2>App Not Found</h2>
-      </div>
-    );
+{app.name.charAt(0)}
 
-  }
+</div>
 
 
 
-  return (
 
-    <div className="app-detail">
+<h1>
+{app.name}
+</h1>
 
 
-      <div
-        className="app-detail-icon"
-        style={{
-          background: app.color
-        }}
-      >
 
-        {app.name.charAt(0)}
+<p>
+{app.desc}
+</p>
 
-      </div>
 
 
+<div className="app-info">
 
-      <h1>
-        {app.name}
-      </h1>
 
+<div>
+<h4>Category</h4>
+<p>{app.category || "Trading"}</p>
+</div>
 
 
-      <p>
-        {app.desc}
-      </p>
 
+<div>
+<h4>Rating</h4>
+<p>⭐ {app.rating || "4.5"}</p>
+</div>
 
 
-      <div className="features-box">
 
-        <h3>
-          Features
-        </h3>
+<div>
+<h4>Version</h4>
+<p>{app.version || "1.0"}</p>
+</div>
 
 
-        <ul>
+</div>
 
-          {
-            app.features?.map((feature,index)=>(
 
-              <li key={index}>
-                ✓ {feature}
-              </li>
 
-            ))
-          }
 
-        </ul>
 
+<div className="features-box">
 
-      </div>
 
+<h3>
+Features
+</h3>
 
 
 
-      <button
+<ul>
 
-        onClick={()=>navigate(app.path)}
+{
+app.features?.map((feature,index)=>(
 
-        className="open-btn"
+<li key={index}>
+✓ {feature}
+</li>
 
-      >
+))
+}
 
-        Open App
 
-      </button>
+</ul>
 
 
+</div>
 
-    </div>
 
-  );
 
-};
+
+
+
+<button
+
+className="open-btn"
+
+onClick={()=>navigate(app.path)}
+
+>
+
+Open App
+
+</button>
+
+
+
+</div>
+
+
+)
+
+
+}
 
 
 export default AppDetail;
