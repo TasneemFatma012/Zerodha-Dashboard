@@ -2527,3 +2527,259 @@ cursor:pointer;
 font-weight:700;
 
 }
+
+/* =========================
+   MOBILE RESPONSIVE FIX
+========================= */
+
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  /* TOPBAR */
+  .topbar {
+    height: auto;
+    padding: 10px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .market-status {
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .market-card {
+    padding: 8px 12px;
+  }
+
+
+  /* MENU */
+  .menu-container {
+    flex-direction: column;
+    height: auto;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .menu-list {
+    width: 100%;
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .menu-list a {
+    white-space: nowrap;
+  }
+
+
+  .profile-card {
+    width: 100%;
+    justify-content: center;
+  }
+
+
+  /* DASHBOARD */
+  .dashboard-layout {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+
+  .main-content {
+    width: 100%;
+  }
+
+
+  .content,
+  .summary-container,
+  .holdings-container,
+  .positions-container,
+  .funds-container,
+  .apps-container,
+  .orders-page,
+  .more-container,
+  .analytics-container {
+
+    padding: 15px;
+  }
+
+
+
+  /* WATCHLIST */
+  .stock-item {
+    padding: 12px;
+  }
+
+
+  .watchlist-actions {
+    opacity: 1;
+    transform: none;
+  }
+
+
+
+  /* STATS */
+  .stats-grid,
+  .orders-summary,
+  .holdings-summary,
+  .position-summary,
+  .stats-section {
+
+    grid-template-columns: 1fr;
+  }
+
+
+
+  /* TABLE RESPONSIVE */
+  .table-card {
+    overflow-x: auto;
+  }
+
+  table {
+    min-width: 600px;
+  }
+
+
+
+  /* FUNDS */
+  .funds-grid {
+    grid-template-columns: 1fr;
+  }
+
+
+
+  /* APPS */
+  .apps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .app-card {
+    flex-direction: row;
+  }
+
+
+
+  /* LOGIN SIGNUP */
+  .login-card,
+  .signup-card {
+
+    width: 90%;
+    padding: 25px;
+
+  }
+
+
+
+  /* APP DETAIL */
+  .app-detail {
+
+    padding:20px;
+
+  }
+
+  .app-detail h1 {
+
+    font-size:28px;
+
+  }
+
+
+
+  .app-info {
+
+    flex-direction: column;
+
+  }
+
+
+
+  /* ANALYTICS */
+  .analytics-cards {
+
+    grid-template-columns:1fr;
+
+  }
+
+
+  .analytics-card {
+
+    width:100%;
+
+  }
+
+
+  .stock-analysis {
+
+    flex-direction:column;
+
+  }
+
+
+  .stock-box {
+
+    width:100%;
+
+  }
+
+
+
+  /* MORE PAGE */
+
+  .investor-summary {
+
+    flex-direction:column;
+    text-align:center;
+
+  }
+
+
+  .summary-box {
+
+    margin-left:0;
+    width:100%;
+
+  }
+
+
+  .more-grid {
+
+    grid-template-columns:1fr;
+
+  }
+
+
+
+  /* BUY WINDOW */
+
+  #buy-window {
+
+    width:95%;
+
+    margin:auto;
+
+  }
+
+
+  .inputs {
+
+    flex-direction:column;
+
+  }
+
+
+  .buttons {
+
+    flex-direction:column;
+
+  }
+
+
+}
